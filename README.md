@@ -5,6 +5,8 @@
 TweetNaCl is a C-extension for Ruby built on top of the official TweetNacl
 distribution. It exposes the basic functions using Ruby objects.
 
+For a detailed explanation of TweetNaCl, [here's the research paper associated with it][paper]
+
 # INSTALL
 
     gem install tweetnacl
@@ -63,3 +65,6 @@ No. Until proven otherwise.
 ## LICENSE
 
 Franck Verrot, Copyright 2014. See LICENSE.txt.
+
+
+[paper] : http://tweetnacl.cr.yp.to/tweetnacl-20131229.pdf
