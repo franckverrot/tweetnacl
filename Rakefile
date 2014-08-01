@@ -1,6 +1,8 @@
 require 'rake/extensiontask'
 spec = Gem::Specification.load('tweetnacl.gemspec')
-Rake::ExtensionTask.new('tweetnacl', spec)
+Rake::ExtensionTask.new('tweetnacl', spec) do |ext|
+  ext.source_pattern = "*.{c,h}"
+end
 
 require 'rake/testtask'
 Rake::TestTask.new do |t|
