@@ -49,13 +49,37 @@ Decrypt the ciphered message given the other parameters.
 
 ## TODO
 
-* [x] crypto_box_keypair
-* [x] crypto_box
+### Raw C-API
+* [x] crypto_box = crypto_box_curve25519xsalsa20poly1305
 * [x] crypto_box_open
-* [x] crypto_secretbox
+* [x] crypto_box_keypair
+* [ ] crypto_box_beforenm
+* [ ] crypto_box_afternm
+* [ ] crypto_box_open_afternm
+* [ ] crypto_core_salsa20
+* [ ] crypto_core_hsalsa20
+* [ ] crypto_hashblocks = crypto_hashblocks_sha512
+* [ ] crypto_hash = crypto_hash_sha512
+* [ ] crypto_onetimeauth = crypto_onetimeauth_poly1305
+* [ ] crypto_onetimeauth_verify
+* [ ] crypto_scalarmult = crypto_scalarmult_curve25519
+* [ ] crypto_scalarmult_base
+* [x] crypto_secretbox = crypto_secretbox_xsalsa20poly1305
 * [x] crypto_secretbox_open
-* [ ] All the other functions !
-* [ ] Use high-level objects
+* [ ] crypto_sign = crypto_sign_ed25519
+* [ ] crypto_sign_open
+* [ ] crypto_sign_keypair
+* [ ] crypto_stream = crypto_stream_xsalsa20
+* [ ] crypto_stream_xor
+* [ ] crypto_stream_salsa20
+* [ ] crypto_stream_salsa20_xor
+* [ ] crypto_verify_16
+* [ ] crypto_verify_32
+
+### Ruby API
+
+* [ ] Cryptobox object
+* [ ] Secretbox object
 
 ## Is it PRODUCTION-READY?
 
