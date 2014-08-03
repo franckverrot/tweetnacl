@@ -14,11 +14,13 @@ void hexdump(char * data, int len)
 
 VALUE m_crypto_box_keypair(VALUE self) {
   VALUE ary = rb_ary_new2(2);
-  char *pk = calloc(crypto_box_PUBLICKEYBYTES, sizeof(unsigned char));
-  char *sk = calloc(crypto_box_SECRETKEYBYTES, sizeof(unsigned char));
+  unsigned char *pk = calloc(crypto_box_PUBLICKEYBYTES, sizeof(unsigned char));
+  unsigned char *sk = calloc(crypto_box_SECRETKEYBYTES, sizeof(unsigned char));
+
   int res = crypto_box_keypair(pk, sk);
-  pk[crypto_box_PUBLICKEYBYTES] = 0;
-  sk[crypto_box_SECRETKEYBYTES] = 0;
+  // TODO: use an exception instead of exit()
+  if (0 != res) { rb_raise(rb_eRuntimeError, "crypto_box_keypair did not work. error %d\n", res); }
+
   rb_ary_store(ary, 0, rb_str_new(pk, crypto_box_PUBLICKEYBYTES));
   rb_ary_store(ary, 1, rb_str_new(sk, crypto_box_SECRETKEYBYTES));
   return ary;
