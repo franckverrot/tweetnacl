@@ -5,6 +5,7 @@
 * Added crypto\_sign\_key\_pair
 * Added crypto\_sign
 * Added crypto\_sign\_open
+* Added a CryptoBox class to the Ruby API
 
 ## 0.2.0 
 

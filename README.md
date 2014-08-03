@@ -40,13 +40,33 @@ One can also create a keypair with an existing tuple of keys like this:
 
 ### CryptoBox
 
-#### initialize / new
+#### initialize / new (<optional: Keypair object>)
 A Cryptobox object contains all the methods required to sign, encrypt and verify
 messages. It is instantiated like so:
 
     cb = CryptoBox.new(<Optional: KeyPair object>)
 
 if no KeyPair is given, `CryptoBox` will create a new one by calling `KeyPair.new`
+
+#### close(message, nonce)
+
+Closing a box requires a message and a nonce.
+
+    cb = CryptBox.new(keypair_to_encrypt)
+    cb.close("hello world", "<a 24-byte nonce>")
+
+#### open(box, nonce)
+
+Opening a box requires a closed box and a nonce.
+
+    [...]
+    closed_box = CryptBox.new(keypair_to_encrypt).tap do |b|
+      b.close("hello world", "<a 24-byte nonce>")
+    end
+
+    decryption_box = CryptBox.new(keypair_to_decrypt)
+    decryption_box.open(closed_box, "<a 24-byte nonce>")
+
 
 ## FUNCTIONS
 
@@ -114,8 +134,8 @@ Verify the signature in message with a public key.
 
 ### Ruby API
 
-* [ ] Cryptobox object
-* [ ] Secretbox object
+* [x] CryptoBox object
+* [ ] CryptoSign object
 
 ## Is it PRODUCTION-READY?
 

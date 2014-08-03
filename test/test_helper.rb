@@ -9,3 +9,5 @@ class String
     self.each_byte.map { |b| sprintf("%X", b) }.join
   end
 end
+
+ValidNonce = "x" * 24

@@ -62,12 +62,15 @@ VALUE m_crypto_box_open(VALUE self, VALUE _c, VALUE _n, VALUE _pk, VALUE _sk) {
   char * pk = RSTRING_PTR(_pk);
   char * sk = RSTRING_PTR(_sk);
   int padded_mlen = rb_str_strlen(_c);
-  char * message = calloc(padded_mlen, sizeof(char));
+  unsigned char * message = (unsigned char*)calloc(padded_mlen, sizeof(unsigned char));
 
   int res = crypto_box_open(message, c, padded_mlen, nonce, pk, sk);
-  if (0 != res) { rb_raise(rb_eRuntimeError, "crypto_box_open did not work"); }
+  if (0 != res) { rb_raise(rb_eRuntimeError, "crypto_box_open did not work. error %d", res); }
 
-  return rb_str_new2(message + PADDING_LEN);
+  message[padded_mlen + 1] = 0;
+
+  VALUE ret = rb_str_new2(message + PADDING_LEN);
+  return ret;
 }
 
 VALUE m_crypto_secretbox(VALUE self, VALUE _m, VALUE _n, VALUE _k) {
