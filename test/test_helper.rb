@@ -1,4 +1,6 @@
 require 'tweetnacl'
+require 'tweetnacl/crypto_box'
+require 'tweetnacl/key_pair'
 require 'minitest/autorun'
 require 'minitest/assertions'
 

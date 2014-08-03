@@ -24,6 +24,30 @@ For a detailed explanation of TweetNaCl, [here's the research paper associated w
 
     assert_equal input, output # They're the same !
 
+## RUBY API
+
+### KeyPair
+
+A KeyPair object represents a pair of public and secret keys. They are created
+with the `crypto_box_keypair` function call.
+
+    keypair = KeyPair.new
+
+One can also create a keypair with an existing tuple of keys like this:
+
+    keypair = KeyPair.new(["<public_key>","<private_key>"])
+
+
+### CryptoBox
+
+#### initialize / new
+A Cryptobox object contains all the methods required to sign, encrypt and verify
+messages. It is instantiated like so:
+
+    cb = CryptoBox.new(<Optional: KeyPair object>)
+
+if no KeyPair is given, `CryptoBox` will create a new one by calling `KeyPair.new`
+
 ## FUNCTIONS
 
 ### crypto_box_keypair
