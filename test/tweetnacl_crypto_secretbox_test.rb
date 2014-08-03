@@ -16,32 +16,14 @@ class TweetNaClCryptoSecretTest < MiniTest::Test
   end
 
   def test_crypto_secretbox_require_message_to_cipher
-    set = false
-    begin
-      TweetNaCl.crypto_secretbox(nil, "bar", "k")
-    rescue ArgumentError => e
-      set = true
-    end
-    assert set, "A message is required"
+    assert_raises(ArgumentError) { TweetNaCl.crypto_secretbox(nil, "bar", "k") }
   end
 
   def test_crypto_secretbox_require_secret_key
-    set = false
-    begin
-      TweetNaCl.crypto_secretbox("foo", "bar", "k")
-    rescue ArgumentError => e
-      set = true
-    end
-    assert set, "A secret key is required"
+    assert_raises(ArgumentError) { TweetNaCl.crypto_secretbox("foo", "bar", "k") }
   end
 
   def test_crypto_secretbox_nonce_not_correct_length
-    set = false
-    begin
-      TweetNaCl.crypto_secretbox("foo", "bar", "k")
-    rescue ArgumentError => e
-      set = true
-    end
-    assert set, "Incorrect nonce length should have raised ArgumentError"
+    assert_raises(ArgumentError) { TweetNaCl.crypto_secretbox("foo", "bar", "k") }
   end
 end
