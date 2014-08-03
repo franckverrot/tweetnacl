@@ -135,7 +135,7 @@ Verify the signature in message with a public key.
 ### Ruby API
 
 * [x] CryptoBox object
-* [ ] CryptoSign object
+* [x] CryptoSign object
 
 ## Is it PRODUCTION-READY?
 

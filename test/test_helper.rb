@@ -1,8 +1,10 @@
 require 'tweetnacl'
+require 'tweetnacl/crypto_sign'
 require 'tweetnacl/crypto_box'
 require 'tweetnacl/key_pair'
 require 'minitest/autorun'
 require 'minitest/assertions'
+require 'pp'
 
 class String
   def hd
