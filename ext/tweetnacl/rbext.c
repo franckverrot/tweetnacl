@@ -144,7 +144,7 @@ VALUE m_crypto_sign(VALUE self, VALUE _m, VALUE _k) {
 }
 
 VALUE m_crypto_sign_open(VALUE self, VALUE _c, VALUE _k) {
-  if(_c == Qnil) { rb_raise(rb_eArgError, "A cipher should have been given"); }
+  if(_c == Qnil) { rb_raise(rb_eArgError, "A message should have been given"); }
   if(_k == Qnil) { rb_raise(rb_eArgError, "Public key should have been given"); }
   if (RSTRING_LEN(_k) != crypto_sign_PUBLICKEYBYTES) { rb_raise(rb_eArgError, "public key should be %d-byte long", crypto_sign_PUBLICKEYBYTES); }
 
