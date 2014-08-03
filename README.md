@@ -74,6 +74,14 @@ Decrypt the ciphered message given the other parameters.
 
 Generate a pair of public and secret keys.
 
+### crypto_sign(message, secret_key)
+
+Sign a message with a secret key.
+
+### crypto_sign_open(message, public_key)
+
+Verify the signature in message with a public key.
+
 
 ## TODO
 
@@ -94,8 +102,8 @@ Generate a pair of public and secret keys.
 * [ ] crypto_scalarmult_base
 * [x] crypto_secretbox (aliased crypto_secretbox_xsalsa20poly1305)
 * [x] crypto_secretbox_open (aliased crypto_secretbox_xsalsa20poly1305_open)
-* [ ] crypto_sign = crypto_sign_ed25519
-* [ ] crypto_sign_open
+* [x] crypto_sign = crypto_sign_ed25519
+* [x] crypto_sign_open
 * [x] crypto_sign_keypair
 * [ ] crypto_stream = crypto_stream_xsalsa20
 * [ ] crypto_stream_xor

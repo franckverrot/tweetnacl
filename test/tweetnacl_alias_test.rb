@@ -10,4 +10,9 @@ class TweetNaClAliasTest < MiniTest::Test
     assert_equal TweetNaCl.method(:crypto_secretbox),      TweetNaCl.method(:crypto_secretbox_xsalsa20poly1305)
     assert_equal TweetNaCl.method(:crypto_secretbox_open), TweetNaCl.method(:crypto_secretbox_xsalsa20poly1305_open)
   end
+
+  def test_crypto_sign_aliased_ed25519
+    assert_equal TweetNaCl.method(:crypto_sign),      TweetNaCl.method(:crypto_sign_ed25519)
+    assert_equal TweetNaCl.method(:crypto_sign_open), TweetNaCl.method(:crypto_sign_ed25519_open)
+  end
 end
