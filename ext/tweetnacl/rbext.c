@@ -107,11 +107,15 @@ VALUE m_crypto_secretbox_open(VALUE self, VALUE _c, VALUE _n, VALUE _k) {
 void Init_tweetnacl() {
   VALUE c = rb_define_module("TweetNaCl");
 
-  rb_define_module_function(c , "crypto_box_keypair"       , RUBY_METHOD_FUNC(m_crypto_box_keypair)                            , 0);
+  rb_define_module_function(c , "crypto_box_keypair"                         , RUBY_METHOD_FUNC(m_crypto_box_keypair)    , 0);
 
-  rb_define_module_function(c , "crypto_box"               , RUBY_METHOD_FUNC(m_crypto_box)                                    , 4);
-  rb_define_module_function(c , "crypto_box_open"          , RUBY_METHOD_FUNC(m_crypto_box_open)                               , 4);
+  rb_define_module_function(c , "crypto_box"                                 , RUBY_METHOD_FUNC(m_crypto_box)            , 4);
+  rb_define_module_function(c , "crypto_box_open"                            , RUBY_METHOD_FUNC(m_crypto_box_open)       , 4);
+  rb_define_module_function(c , "crypto_box_curve25519xsalsa20poly1305"      , RUBY_METHOD_FUNC(m_crypto_box)            , 4);
+  rb_define_module_function(c , "crypto_box_curve25519xsalsa20poly1305_open" , RUBY_METHOD_FUNC(m_crypto_box_open)       , 4);
 
-  rb_define_module_function(c , "crypto_secretbox"         , RUBY_METHOD_FUNC(m_crypto_secretbox)         , 3);
-  rb_define_module_function(c , "crypto_secretbox_open"    , RUBY_METHOD_FUNC(m_crypto_secretbox_open)    , 3);
+  rb_define_module_function(c , "crypto_secretbox"                           , RUBY_METHOD_FUNC(m_crypto_secretbox)      , 3);
+  rb_define_module_function(c , "crypto_secretbox_open"                      , RUBY_METHOD_FUNC(m_crypto_secretbox_open) , 3);
+  rb_define_module_function(c , "crypto_secretbox_xsalsa20poly1305"          , RUBY_METHOD_FUNC(m_crypto_secretbox)      , 3);
+  rb_define_module_function(c , "crypto_secretbox_xsalsa20poly1305_open"     , RUBY_METHOD_FUNC(m_crypto_secretbox_open) , 3);
 }

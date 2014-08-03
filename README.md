@@ -50,8 +50,8 @@ Decrypt the ciphered message given the other parameters.
 ## TODO
 
 ### Raw C-API
-* [x] crypto_box = crypto_box_curve25519xsalsa20poly1305
-* [x] crypto_box_open
+* [x] crypto_box (aliased crypto_box_curve25519xsalsa20poly1305)
+* [x] crypto_box_open (aliased crypto_box_curve25519xsalsa20poly1305_open)
 * [x] crypto_box_keypair
 * [ ] crypto_box_beforenm
 * [ ] crypto_box_afternm
@@ -64,8 +64,8 @@ Decrypt the ciphered message given the other parameters.
 * [ ] crypto_onetimeauth_verify
 * [ ] crypto_scalarmult = crypto_scalarmult_curve25519
 * [ ] crypto_scalarmult_base
-* [x] crypto_secretbox = crypto_secretbox_xsalsa20poly1305
-* [x] crypto_secretbox_open
+* [x] crypto_secretbox (aliased crypto_secretbox_xsalsa20poly1305)
+* [x] crypto_secretbox_open (aliased crypto_secretbox_xsalsa20poly1305_open)
 * [ ] crypto_sign = crypto_sign_ed25519
 * [ ] crypto_sign_open
 * [ ] crypto_sign_keypair
