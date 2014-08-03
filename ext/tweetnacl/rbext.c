@@ -26,6 +26,7 @@ VALUE m_crypto_box_keypair(VALUE self) {
 
 VALUE m_crypto_box(VALUE self, VALUE _m, VALUE _n, VALUE _pk, VALUE _sk) {
   if(_m == Qnil) { rb_raise(rb_eArgError, "A message should have been given"); }
+  if(_n == Qnil) { rb_raise(rb_eArgError, "A nonce should have been given"); }
   if(_pk == Qnil) { rb_raise(rb_eArgError, "Public key should have been given"); }
   if(_sk == Qnil) { rb_raise(rb_eArgError, "Secret key should have been given"); }
   if (RSTRING_LEN(_n)  != 24) { rb_raise(rb_eArgError, "nonce should be 24-byte long"); }
@@ -49,11 +50,12 @@ VALUE m_crypto_box(VALUE self, VALUE _m, VALUE _n, VALUE _pk, VALUE _sk) {
 
 VALUE m_crypto_box_open(VALUE self, VALUE _c, VALUE _n, VALUE _pk, VALUE _sk) {
   if(_c == Qnil) { rb_raise(rb_eArgError, "A cipher should have been given"); }
+  if(_n == Qnil) { rb_raise(rb_eArgError, "A nonce should have been given"); }
   if(_pk == Qnil) { rb_raise(rb_eArgError, "Public key should have been given"); }
   if(_sk == Qnil) { rb_raise(rb_eArgError, "Secret key should have been given"); }
-  if (RSTRING_LEN(_n)  != 24) { rb_raise(rb_eArgError, "nonce should be 24-byte long"); }
-  if (RSTRING_LEN(_pk) != 32) { rb_raise(rb_eArgError, "public key should be 24-byte long"); }
-  if (RSTRING_LEN(_sk) != 32) { rb_raise(rb_eArgError, "secret key should be 24-byte long"); }
+  if (RSTRING_LEN(_n)  != crypto_box_NONCEBYTES)     { rb_raise(rb_eArgError, "nonce should be %d-byte long", crypto_box_NONCEBYTES); }
+  if (RSTRING_LEN(_pk) != crypto_box_PUBLICKEYBYTES) { rb_raise(rb_eArgError, "public key should be %d-byte long", crypto_box_PUBLICKEYBYTES); }
+  if (RSTRING_LEN(_sk) != crypto_box_SECRETKEYBYTES) { rb_raise(rb_eArgError, "secret key should be %d-byte long", crypto_box_SECRETKEYBYTES); }
 
   unsigned char * c = RSTRING_PTR(_c);
   char * nonce = RSTRING_PTR(_n);
