@@ -104,6 +104,19 @@ VALUE m_crypto_secretbox_open(VALUE self, VALUE _c, VALUE _n, VALUE _k) {
   return rb_str_new2(message + PADDING_LEN);
 }
 
+VALUE m_crypto_sign_keypair(VALUE self) {
+  VALUE ary = rb_ary_new2(2);
+  char *pk = calloc(crypto_sign_PUBLICKEYBYTES, sizeof(unsigned char));
+  char *sk = calloc(crypto_sign_SECRETKEYBYTES, sizeof(unsigned char));
+  int res = crypto_sign_keypair(pk, sk);
+  pk[crypto_sign_PUBLICKEYBYTES] = 0;
+  sk[crypto_sign_SECRETKEYBYTES] = 0;
+  rb_ary_store(ary, 0, rb_str_new(pk, crypto_sign_PUBLICKEYBYTES));
+  rb_ary_store(ary, 1, rb_str_new(sk, crypto_sign_SECRETKEYBYTES));
+  return ary;
+}
+
+
 void Init_tweetnacl() {
   VALUE c = rb_define_module("TweetNaCl");
 
@@ -118,4 +131,6 @@ void Init_tweetnacl() {
   rb_define_module_function(c , "crypto_secretbox_open"                      , RUBY_METHOD_FUNC(m_crypto_secretbox_open) , 3);
   rb_define_module_function(c , "crypto_secretbox_xsalsa20poly1305"          , RUBY_METHOD_FUNC(m_crypto_secretbox)      , 3);
   rb_define_module_function(c , "crypto_secretbox_xsalsa20poly1305_open"     , RUBY_METHOD_FUNC(m_crypto_secretbox_open) , 3);
+
+  rb_define_module_function(c , "crypto_sign_keypair"                        , RUBY_METHOD_FUNC(m_crypto_sign_keypair)   , 0);
 }

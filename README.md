@@ -70,6 +70,10 @@ Encrypt the input given the other parameters.
 
 Decrypt the ciphered message given the other parameters.
 
+### crypto_sign_keypair
+
+Generate a pair of public and secret keys.
+
 
 ## TODO
 
@@ -92,7 +96,7 @@ Decrypt the ciphered message given the other parameters.
 * [x] crypto_secretbox_open (aliased crypto_secretbox_xsalsa20poly1305_open)
 * [ ] crypto_sign = crypto_sign_ed25519
 * [ ] crypto_sign_open
-* [ ] crypto_sign_keypair
+* [x] crypto_sign_keypair
 * [ ] crypto_stream = crypto_stream_xsalsa20
 * [ ] crypto_stream_xor
 * [ ] crypto_stream_salsa20
