@@ -1,16 +1,10 @@
 require 'test_helper'
 
 class TweetNaClCryptoBoxOpenTest < MiniTest::Test
-  def setup
-    @t = TweetNaCl.new
-  end
-
-  def teardown; end
-
   def test_crypto_box_open_require_cipher_to_decrypt
     set = false
     begin
-      @t.crypto_box_open(nil, nil, nil, nil)
+      TweetNaCl.crypto_box_open(nil, nil, nil, nil)
     rescue Exception => e
       set = true
     end
@@ -20,7 +14,7 @@ class TweetNaClCryptoBoxOpenTest < MiniTest::Test
   def test_crypto_box_open_require_public_key
     set = false
     begin
-      @t.crypto_box_open("foo", nil, "foo", nil)
+      TweetNaCl.crypto_box_open("foo", nil, "foo", nil)
     rescue ArgumentError => e
       set = true
     end
@@ -30,7 +24,7 @@ class TweetNaClCryptoBoxOpenTest < MiniTest::Test
   def test_crypto_box_open_require_secret_key
     set = false
     begin
-      @t.crypto_box_open("foo", "foo", "foo", nil)
+      TweetNaCl.crypto_box_open("foo", "foo", "foo", nil)
     rescue ArgumentError => e
       set = true
     end
@@ -40,7 +34,7 @@ class TweetNaClCryptoBoxOpenTest < MiniTest::Test
   def test_crypto_box_open_nonce_not_correct_length
     set = false
     begin
-      @t.crypto_box("foo", "bar", "pk", "sk")
+      TweetNaCl.crypto_box("foo", "bar", "pk", "sk")
     rescue ArgumentError => e
       set = true
     end

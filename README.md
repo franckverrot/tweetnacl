@@ -16,13 +16,11 @@ For a detailed explanation of TweetNaCl, [here's the research paper associated w
     input = "<text to cipher>"
     nonce = "<a 24-char string>"
 
-    @t = TweetNaCl.new
+    pk, sk = TweetNaCl.crypto_box_keypair # This generates a pair of public and secret keys
 
-    pk, sk = @t.crypto_box_keypair # This generates a pair of public and secret keys
+    cipher = TweetNaCl.crypto_box(input, nonce, pk, sk) # Encrypt !
 
-    cipher = @t.crypto_box(input, nonce, pk, sk) # Encrypt !
-
-    output = @t.crypto_box_open(cipher, nonce, pk, sk) # Decrypt!
+    output = TweetNaCl.crypto_box_open(cipher, nonce, pk, sk) # Decrypt!
 
     assert_equal input, output # They're the same !
 

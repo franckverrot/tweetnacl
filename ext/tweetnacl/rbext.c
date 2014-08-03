@@ -1,21 +1,7 @@
-#include <ruby.h>
+#include <ruby/ruby.h>
 #include <ruby/encoding.h>
 #include "tweetnacl.h"
 #define PADDING_LEN 32
-
-typedef struct {
-} TweetNaCl;
-
-static void tweetnacl_free() {
-}
-
-static VALUE tweetnacl_alloc(VALUE klass) {
-  return Data_Wrap_Struct(klass, NULL, tweetnacl_free, ruby_xmalloc(sizeof(TweetNaCl)));
-}
-
-static VALUE tweetnacl_init(VALUE self) {
-  return Qnil;
-}
 
 void hexdump(char * data, int len)
 {
@@ -137,14 +123,12 @@ VALUE m_crypto_box_curve25519xsalsa20poly1305_open(VALUE self, VALUE _c, VALUE _
 }
 
 void Init_tweetnacl() {
-  VALUE c = rb_define_class("TweetNaCl", rb_cObject);
+  VALUE c = rb_define_module("TweetNaCl");
 
-  rb_define_alloc_func(c, tweetnacl_alloc);
-  rb_define_private_method(c, "initialize", RUBY_METHOD_FUNC(tweetnacl_init), 0);
-  rb_define_method(c, "crypto_box_keypair", RUBY_METHOD_FUNC(m_crypto_box_keypair), 0);
-  rb_define_method(c, "crypto_box", RUBY_METHOD_FUNC(m_crypto_box), 4);
-  rb_define_method(c, "crypto_box_open", RUBY_METHOD_FUNC(m_crypto_box_open), 4);
-  rb_define_method(c, "crypto_box_curve25519xsalsa20poly1305_keypair", RUBY_METHOD_FUNC(m_crypto_box_curve25519xsalsa20poly1305_keypair), 0);
-  rb_define_method(c, "crypto_box_curve25519xsalsa20poly1305", RUBY_METHOD_FUNC(m_crypto_box_curve25519xsalsa20poly1305), 4);
-  rb_define_method(c, "crypto_box_curve25519xsalsa20poly1305_open", RUBY_METHOD_FUNC(m_crypto_box_curve25519xsalsa20poly1305_open), 4);
+  rb_define_module_function(c, "crypto_box_keypair", RUBY_METHOD_FUNC(m_crypto_box_keypair), 0);
+  rb_define_module_function(c, "crypto_box", RUBY_METHOD_FUNC(m_crypto_box), 4);
+  rb_define_module_function(c, "crypto_box_open", RUBY_METHOD_FUNC(m_crypto_box_open), 4);
+  rb_define_module_function(c, "crypto_box_curve25519xsalsa20poly1305_keypair", RUBY_METHOD_FUNC(m_crypto_box_curve25519xsalsa20poly1305_keypair), 0);
+  rb_define_module_function(c, "crypto_box_curve25519xsalsa20poly1305", RUBY_METHOD_FUNC(m_crypto_box_curve25519xsalsa20poly1305), 4);
+  rb_define_module_function(c, "crypto_box_curve25519xsalsa20poly1305_open", RUBY_METHOD_FUNC(m_crypto_box_curve25519xsalsa20poly1305_open), 4);
 }
