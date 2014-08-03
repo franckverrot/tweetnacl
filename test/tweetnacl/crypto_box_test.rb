@@ -11,9 +11,7 @@ class CryptoBoxTest < MiniTest::Test
   end
 
   def test_can_box_a_message_with_a_nonce
-    require 'pp'
     message = "hello world"
-    expected_cipher = "0000000000000000FBC937C3F136E09FA8A45C58C15E801394F5BB74CE8D538FE3D726"
     nonce = ValidNonce
     nonce = "*" * 24
 
