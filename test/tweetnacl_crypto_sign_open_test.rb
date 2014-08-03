@@ -8,5 +8,6 @@ class TweetNaClCryptoSignOpenTest < MiniTest::Test
   def test_crypto_sign_open_require_public_key
     assert_raises(ArgumentError) { TweetNaCl.crypto_sign_open("foo", nil) }
     assert_raises(ArgumentError) { TweetNaCl.crypto_sign_open("foo", "too_short_public_key") }
+    assert_raises(RuntimeError)  { TweetNaCl.crypto_sign_open("foo", "an incorrect 32 bit.............") }
   end
 end

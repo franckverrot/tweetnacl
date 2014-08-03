@@ -41,6 +41,7 @@ VALUE m_crypto_box(VALUE self, VALUE _m, VALUE _n, VALUE _pk, VALUE _sk) {
   memcpy(padded_message + PADDING_LEN, message, strlen(message));
   char * c = malloc(strlen(message) + PADDING_LEN);
   int res = crypto_box(c, padded_message, len + PADDING_LEN, nonce, pk, sk);
+  // TODO: use an exception instead of exit()
   if (0 != res) { fprintf(stderr, "Something went wrong\n"); exit(res); }
   VALUE ret = rb_str_new(c, len + PADDING_LEN);
   return ret;
@@ -81,6 +82,7 @@ VALUE m_crypto_secretbox(VALUE self, VALUE _m, VALUE _n, VALUE _k) {
   memcpy(padded_message + PADDING_LEN, message, strlen(message));
   char * c = malloc(strlen(message) + PADDING_LEN);
   int res = crypto_secretbox(c, padded_message, len + PADDING_LEN, nonce, k);
+  // TODO: use an exception instead of exit()
   if (0 != res) { fprintf(stderr, "Something went wrong\n"); exit(res); }
   VALUE ret = rb_str_new(c, len + PADDING_LEN);
   return ret;
@@ -128,6 +130,7 @@ VALUE m_crypto_sign(VALUE self, VALUE _m, VALUE _k) {
   unsigned long long int smlen = 0;
 
   int res = crypto_sign(c, &smlen, message, len, k);
+  // TODO: use an exception instead of exit()
   if (0 != res) { fprintf(stderr, "crypto_sign did not work\n"); exit(res); }
   VALUE ret = rb_str_new(c, smlen);
   return ret;
@@ -146,7 +149,7 @@ VALUE m_crypto_sign_open(VALUE self, VALUE _c, VALUE _k) {
 
   int res = crypto_sign_open(message, &mlen, cipher, len, k);
   message[len] = 0;
-  if (0 != res) { fprintf(stderr, "crypto_sign_open did not work. error %d\n", res); exit(res); }
+  if (0 != res) { rb_raise(rb_eRuntimeError, "crypto_sign_open did not work. error %d\n", res); }
   VALUE ret = rb_str_new(message, mlen);
   return ret;
 }

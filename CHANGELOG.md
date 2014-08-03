@@ -1,6 +1,10 @@
 # Releases
 
-## UNRELEASED
+## UNRELEASED (0.3.0)
+
+* Added crypto\_sign\_key\_pair
+* Added crypto\_sign
+* Added crypto\_sign\_open
 
 ## 0.2.0 
 
