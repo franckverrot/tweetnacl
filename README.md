@@ -34,18 +34,26 @@ Generate a pair of public and secret keys.
 
 Encrypt and sign the input given the other parameters.
 
-### crypto_box_keypair(ciphered_message, nonce, public_key, secret_key)
+### crypto_box_open(ciphered_message, nonce, public_key, secret_key)
 
 Decrypt and verify the signature of the ciphered message given the other parameters.
+
+### crypto_secretbox(input, nonce, public_key)
+
+Encrypt the input given the other parameters.
+
+### crypto_secretbox_open(ciphered_message, nonce, public_key)
+
+Decrypt the ciphered message given the other parameters.
+
 
 ## TODO
 
 * [x] crypto_box_keypair
 * [x] crypto_box
 * [x] crypto_box_open
-* [x] crypto_box_curve25519xsalsa20poly1305_keypair
-* [x] crypto_box_curve25519xsalsa20poly1305
-* [x] crypto_box_curve25519xsalsa20poly1305_open
+* [x] crypto_secretbox
+* [x] crypto_secretbox_open
 * [ ] All the other functions !
 * [ ] Use high-level objects
 
