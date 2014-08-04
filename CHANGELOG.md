@@ -6,6 +6,7 @@
 * Added crypto\_sign
 * Added crypto\_sign\_open
 * Added a CryptoBox class to the Ruby API
+* Added the C #define's to the Ruby API as constants under the TweetNacl module
 
 ## 0.2.0 
 
