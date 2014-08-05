@@ -1,6 +1,8 @@
 #include <ruby/ruby.h>
+#include <ruby/intern.h>
 #include <ruby/encoding.h>
 #include "tweetnacl.h"
+#include "probes.h"
 #define PADDING_LEN 32
 
 void hexdump(char * data, int len)
@@ -13,6 +15,7 @@ void hexdump(char * data, int len)
 }
 
 VALUE m_crypto_box_keypair(VALUE self) {
+  if(TWEETNACL_METHOD_ENTRY_ENABLED()) { TWEETNACL_METHOD_ENTRY(rb_sourcefile(),rb_sourceline()); }
   VALUE ary = rb_ary_new2(2);
   unsigned char *pk = calloc(crypto_box_PUBLICKEYBYTES, sizeof(unsigned char));
   unsigned char *sk = calloc(crypto_box_SECRETKEYBYTES, sizeof(unsigned char));
@@ -23,10 +26,12 @@ VALUE m_crypto_box_keypair(VALUE self) {
 
   rb_ary_store(ary, 0, rb_str_new(pk, crypto_box_PUBLICKEYBYTES));
   rb_ary_store(ary, 1, rb_str_new(sk, crypto_box_SECRETKEYBYTES));
+  if(TWEETNACL_METHOD_RETURN_ENABLED()) { TWEETNACL_METHOD_RETURN(rb_sourcefile(),rb_sourceline()); }
   return ary;
 }
 
 VALUE m_crypto_box(VALUE self, VALUE _m, VALUE _n, VALUE _pk, VALUE _sk) {
+  if(TWEETNACL_METHOD_ENTRY_ENABLED()) { TWEETNACL_METHOD_ENTRY(rb_sourcefile(),rb_sourceline()); }
   if(_m == Qnil) { rb_raise(rb_eArgError, "A message should have been given"); }
   if(_n == Qnil) { rb_raise(rb_eArgError, "A nonce should have been given"); }
   if(_pk == Qnil) { rb_raise(rb_eArgError, "Public key should have been given"); }
@@ -47,10 +52,12 @@ VALUE m_crypto_box(VALUE self, VALUE _m, VALUE _n, VALUE _pk, VALUE _sk) {
   // TODO: use an exception instead of exit()
   if (0 != res) { fprintf(stderr, "Something went wrong\n"); exit(res); }
   VALUE ret = rb_str_new(c, len + PADDING_LEN);
+  if(TWEETNACL_METHOD_RETURN_ENABLED()) { TWEETNACL_METHOD_RETURN(rb_sourcefile(),rb_sourceline()); }
   return ret;
 }
 
 VALUE m_crypto_box_open(VALUE self, VALUE _c, VALUE _n, VALUE _pk, VALUE _sk) {
+  if(TWEETNACL_METHOD_ENTRY_ENABLED()) { TWEETNACL_METHOD_ENTRY(rb_sourcefile(),rb_sourceline()); }
   if(_c == Qnil) { rb_raise(rb_eArgError, "A cipher should have been given"); }
   if(_n == Qnil) { rb_raise(rb_eArgError, "A nonce should have been given"); }
   if(_pk == Qnil) { rb_raise(rb_eArgError, "Public key should have been given"); }
@@ -72,6 +79,7 @@ VALUE m_crypto_box_open(VALUE self, VALUE _c, VALUE _n, VALUE _pk, VALUE _sk) {
   message[padded_mlen + 1] = 0;
 
   VALUE ret = rb_str_new2(message + PADDING_LEN);
+  if(TWEETNACL_METHOD_RETURN_ENABLED()) { TWEETNACL_METHOD_RETURN(rb_sourcefile(),rb_sourceline()); }
   return ret;
 }
 

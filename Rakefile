@@ -15,4 +15,11 @@ end
 task :default => :full
 
 desc "Run the full spec suite"
-task :full => ["clean", "compile", "test"]
+task :full => ["clean", "probes", "compile", "test"]
+
+desc "Compile the probes"
+task :probes do
+  Dir.chdir('ext/tweetnacl') do
+    `dtrace -o probes.h -h -s probes.d`
+  end
+end
