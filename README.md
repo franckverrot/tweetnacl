@@ -131,6 +131,7 @@ Verify the signature in message with a public key.
 * [ ] crypto_stream_salsa20_xor
 * [ ] crypto_verify_16
 * [ ] crypto_verify_32
+* [ ] USDT / probes
 
 ### Ruby API
 
