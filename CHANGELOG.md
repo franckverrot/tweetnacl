@@ -1,6 +1,8 @@
 # Releases
 
-## UNRELEASED (0.3.0)
+## UNRELEASED (0.4.0)
+
+## 0.3.0 - Aug 19th 2014
 
 * Added crypto\_sign\_key\_pair
 * Added crypto\_sign
