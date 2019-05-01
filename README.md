@@ -1,4 +1,4 @@
-# TweetNaCl for Ruby
+# TweetNaCl for Ruby [![CircleCI](https://circleci.com/gh/franckverrot/tweetnacl.svg?style=svg)](https://circleci.com/gh/franckverrot/tweetnacl)
 
 ## SUMMARY
 
