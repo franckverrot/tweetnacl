@@ -9,6 +9,8 @@ typedef long long i64;
 typedef i64 gf[16];
 extern void randombytes(u8 *,u64);
 
+int salsa_rounds = 20;
+
 static const u8
   _0[16],
   _9[32] = {9};
@@ -82,7 +84,7 @@ sv core(u8 *out,const u8 *in,const u8 *k,const u8 *c,int h)
 
   FOR(i,16) y[i] = x[i];
 
-  FOR(i,20) {
+  FOR(i,salsa_rounds) {
     FOR(j,4) {
       FOR(m,4) t[m] = x[(5*j+4*m)%16];
       t[1] ^= L32(t[0]+t[3], 7);

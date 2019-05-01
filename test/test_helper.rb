@@ -1,4 +1,5 @@
 require 'tweetnacl'
+require 'tweet_na_cl'
 require 'tweetnacl/crypto_sign'
 require 'tweetnacl/crypto_box'
 require 'tweetnacl/key_pair'
