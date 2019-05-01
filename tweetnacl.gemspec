@@ -39,4 +39,6 @@ You might need to go through all persisted ciphers and change these values.
 If you have more questions, please file a ticket!  Thanks!
 END_OF_MESSAGE
 
+  spec.cert_chain  = ['certs/franckverrot.pem']
+  spec.signing_key = File.expand_path(ENV['RUBYGEMS_CERT_PATH']) if $0 =~ /gem\z/
 end
